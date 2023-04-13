@@ -20,6 +20,14 @@ model Example {
     updatedAt DateTime @updatedAt
 }
 
+model Phrase {
+    id     String @id @default(cuid())
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -55,6 +63,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Phrase        Phrase[]
 }
 
 model VerificationToken {
